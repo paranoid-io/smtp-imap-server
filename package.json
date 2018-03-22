@@ -1,0 +1,7 @@
+{
+  "name": "smtp-imap-server",
+  "version": "0.0.1",
+  "description": "A simple SMTP/IMAP server using Postfix, Dovecot, OpenDKIM and Spamassassin",
+  "author": "Clément DOUIN <clement.douin@gmail.com>",
+  "license": "MIT"
+}

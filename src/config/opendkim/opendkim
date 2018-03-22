@@ -1,0 +1,7 @@
+RUNDIR=/var/run/opendkim
+SOCKET="local:/var/spool/postfix/var/run/opendkim/opendkim.sock"
+USER=opendkim
+GROUP=opendkim
+PIDFILE=$RUNDIR/$NAME.pid
+EXTRAAFTER=
+

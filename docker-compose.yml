@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  mail-server:
+    container_name: mail-server
+    build:
+      context: ./src
+      args:
+        - DOMAIN_FULL=${MAIL_DOMAIN}
+        - USERNAME=${MAIL_USERNAME}
+        - PASSWORD=${MAIL_PASSWORD}
+        - COUNTRY=${MAIL_SERVER_COUNTRY}
+        - STATE=${MAIL_SERVER_STATE}
+        - CITY=${MAIL_SERVER_CITY}
+        - COMPANY=${MAIL_FULLNAME}
+    environment:
+      - DOMAIN_FULL=${MAIL_DOMAIN}
+    ports:
+      - "${MAIL_SERVER_SMTP_PORT}:25"
+      - "${MAIL_SERVER_IMAP_PORT}:143"
+    # volumes:
+    #   - ./mail-server/backup:/home/${MAIL_USERNAME}/Maildir
+

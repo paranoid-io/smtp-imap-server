@@ -1,0 +1,46 @@
+myorigin = /etc/mailname
+myhostname = mail.example.com
+mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
+mydestination = mail.example.com, example.com, localhost, localhost.localdomain
+
+alias_maps = hash:/etc/aliases
+alias_database = hash:/etc/aliases
+
+tls_ssl_options = NO_COMPRESSION
+tls_high_cipherlist=EDH+CAMELLIA:EDH+aRSA:EECDH+aRSA+AESGCM:EECDH+aRSA+SHA384:EECDH+aRSA+SHA256:EECDH:+CAMELLIA256:+AES256:+CAMELLIA128:+AES128:+SSLv3:!aNULL:!eNULL:!LOW:!3DES:!MD5:!EXP:!PSK:!DSS:!RC4:!SEED:!ECDSA:CAMELLIA256-SHA:AES256-SHA:CAMELLIA128-SHA:AES128-SHA
+
+smtpd_sasl_auth_enable = yes
+smtpd_sasl_type = dovecot
+smtpd_sasl_path = private/auth
+smtpd_sasl_security_options = noanonymous, noplaintext
+smtpd_sasl_tls_security_options = noanonymous
+smtpd_use_tls = yes
+smtpd_tls_auth_only = yes 
+smtpd_tls_received_header = yes 
+smtpd_tls_security_level = encrypt
+smtpd_tls_loglevel = 1
+smtpd_tls_cert_file=/etc/ssl/certs/mailcert.pem
+smtpd_tls_key_file=/etc/ssl/private/mailkey.pem
+smtpd_tls_mandatory_protocols = !SSLv2, !SSLv3
+smtpd_tls_protocols = !SSLv2, !SSLv3
+smtpd_tls_mandatory_ciphers = high
+smtpd_tls_eecdh_grade = ultra
+smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
+smtpd_milters = local:var/run/opendkim/opendkim.sock
+smtpd_recipient_restrictions =
+  permit_mynetworks,
+  permit_sasl_authenticated,
+  reject_unauth_destination,
+  check_policy_service unix:private/policyd-spf
+
+compatibility_level = 2
+mailbox_size_limit = 0
+recipient_delimiter = +
+inet_interfaces = all
+policyd-spf_time_limit = 3600
+milter_default_action = accept
+milter_protocol = 6
+non_smtpd_milters = local:var/run/opendkim/opendkim.sock
+broken_sasl_auth_clients = yes
+home_mailbox = Maildir/
+
