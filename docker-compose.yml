@@ -4,7 +4,7 @@ services:
   mail-server:
     container_name: mail-server
     build:
-      context: ./src
+      context: ./docker
       args:
         - DOMAIN_FULL=${MAIL_DOMAIN}
         - USERNAME=${MAIL_USERNAME}
