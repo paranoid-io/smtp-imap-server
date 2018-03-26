@@ -1,8 +1,8 @@
-version: '3'
+version: '2'
 
 services:
-  mail-server:
-    container_name: mail-server
+  smtp-imap-server:
+    container_name: smtp-imap-server
     build:
       context: ./docker
       args:
